@@ -1,4 +1,7 @@
 run:
 	cd working/ && go run main.go
 
-.PHONY: run
+pushtogit:
+	git add . &&  git commit -m "go" && git push
+
+.PHONY: run pushtogit
