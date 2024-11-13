@@ -16,11 +16,13 @@ func main() {
 
 	l := log.New(os.Stdout, "product api ",log.LstdFlags)
 
-	hh := handlers.NewHello(l)
+	// hh := handlers.NewHello(l)
+	ph := handlers.NewProduct(l)
+
 
 	sm := http.NewServeMux()
 
-	sm.Handle("/", hh)
+	sm.Handle("/", ph)
 
 	server := http.Server{
 		Addr: add,
