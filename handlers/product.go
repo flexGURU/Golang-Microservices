@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"encoding/json"
 	"log"
 	"net/http"
 
@@ -19,11 +18,10 @@ func NewProduct(l *log.Logger) *Products {
 
 func (p *Products) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	productList := data.GetProduct()
-	jsonProducts, err := json.MarshalIndent(productList, "", "  ")
+	err := productList.ToJSON(w)
 	if err != nil {
 		http.Error(w, "error unmarshalling data", http.StatusInternalServerError)
 	}
 
-	w.Write(jsonProducts)
 
 }
