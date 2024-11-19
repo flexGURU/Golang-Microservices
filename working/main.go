@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/flexGURU/tutorials/handlers"
+	"github.com/gorilla/mux"
 )
 
 func main() {
@@ -20,13 +21,24 @@ func main() {
 	ph := handlers.NewProduct(l)
 
 
-	sm := http.NewServeMux()
+	// Creating the new router
+	serveMux := mux.NewRouter()
+	// Registeriung a GET request as a subrouter that inhertis from the parent router i.e ServeMux
+	getRouter := serveMux.Methods(http.MethodGet).Subrouter()
+	// Handle GET requests for this specific route 
+	getRouter.HandleFunc("/", ph.GetProduct)
 
-	sm.Handle("/", ph)
+	addRouter := serveMux.Methods(http.MethodPost).Subrouter()
+	addRouter.HandleFunc("/", ph.AddPrdoduct )
+
+
+	// sm := http.NewServeMux()
+
+	// sm.Handle("/", ph)
 
 	server := http.Server{
 		Addr: add,
-		Handler: sm,
+		Handler: serveMux,
 		ErrorLog: l,
 		ReadTimeout: 5*time.Second,
 		WriteTimeout: 10*time.Second,

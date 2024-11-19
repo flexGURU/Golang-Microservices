@@ -4,4 +4,10 @@ run:
 pushtogit:
 	git add . &&  git commit -m "go" && git push
 
-.PHONY: run pushtogit
+swagger:
+	swagger generate spec -o ./swagger.yaml --scan-models
+
+installswagger:
+	install github.com/go-swagger/go-swagger/cmd/swagger@latest
+
+.PHONY: run pushtogit swagger installswagger
