@@ -7,7 +7,7 @@
 ### MicroServices
 - use of Http Handlers for dealing with http reponses and requests
 - Gorilla Mux for creating serve Mux for dealing with routing
-- Swagger Open API for API documentation -- ## [./swagger.yaml]
+- Swagger Open API for API documentation -- ## [./swagger.yaml](./swagger.yaml)
 
 
 ## Golang Basics
