@@ -1,6 +1,6 @@
 # Proudct API
 
-## The API consists of a main Go server that listens at port 8080 for requests and responds accordingly. For this we use The Gorilla Mux ServeMux that has Subrouters for the Product Handler and handles each request based on the Http method i.e POST or GET with reference to the route. 
+### The API consists of a main Go server that listens at port 8080 for requests and responds accordingly. For this we use The Gorilla Mux ServeMux that has Subrouters for the Product Handler and handles each request based on the Http method i.e POST or GET with reference to the route. 
 
 - Check swagger API documentation for more info:  [./swagger.yaml](./swagger.yaml)
 
