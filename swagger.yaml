@@ -3,7 +3,6 @@ consumes:
     - application/json
 definitions:
     Product:
-        description: Product defines the structure for an API Product
         properties:
             description:
                 type: string
@@ -36,6 +35,14 @@ paths:
             responses:
                 "200":
                     $ref: '#/responses/productResponse'
+            tags:
+                - products
+        post:
+            description: Adds Products to the Data store
+            operationId: addProducts
+            responses:
+                "200":
+                    $ref: '#/responses/prodductReponse'
             tags:
                 - products
 produces:

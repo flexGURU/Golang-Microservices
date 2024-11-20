@@ -9,8 +9,12 @@ import (
 
 )
 
-// Product defines the structure for an API Product
+// swagger:model
 type Product struct {
+	// The id of the user
+	// 
+	// required: true
+	
 	ID          int		`json:"id"`
 	Name        string	`json:"name" validate:"required"`
 	Description string	`json:"description" validate:"required,min=3,max=20"`

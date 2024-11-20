@@ -52,7 +52,10 @@ func (p *Products) GetProduct(w http.ResponseWriter, r *http.Request) {
 
 }
 
-// swagger
+// swagger:route POST /products products addProducts
+// Adds Products to the Data store
+// responses: 
+// 200: prodductReponse
 func (p *Products) AddPrdoduct(w http.ResponseWriter, r *http.Request)  {
 	p.l.Println("post")
 

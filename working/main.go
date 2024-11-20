@@ -7,9 +7,11 @@ import (
 	"os"
 	"os/signal"
 	"time"
-
+	"github.com/go-openapi/runtime/middleware"
 	"github.com/flexGURU/tutorials/handlers"
 	"github.com/gorilla/mux"
+	gohandlers "github.com/gorilla/handlers"
+
 )
 
 func main() {
@@ -31,6 +33,18 @@ func main() {
 	addRouter := serveMux.Methods(http.MethodPost).Subrouter()
 	addRouter.HandleFunc("/", ph.AddPrdoduct )
 
+	ops := middleware.RedocOpts{SpecURL: "/swagger.yaml"}
+	sh := middleware.Redoc(ops, nil)
+
+	getRouter.Handle("/docs", sh)
+
+	getRouter.Handle("/swagger.yaml", http.FileServer(http.Dir("../")))
+
+
+	// CORS Header
+	corsHandler := gohandlers.CORS(gohandlers.AllowedOrigins([]string{"http://localhost:4200"}))
+
+
 
 	// sm := http.NewServeMux()
 
@@ -38,7 +52,7 @@ func main() {
 
 	server := http.Server{
 		Addr: add,
-		Handler: serveMux,
+		Handler: corsHandler(serveMux),
 		ErrorLog: l,
 		ReadTimeout: 5*time.Second,
 		WriteTimeout: 10*time.Second,

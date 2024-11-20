@@ -4,10 +4,17 @@ run:
 pushtogit:
 	git add . &&  git commit -m "go" && git push
 
-swagger:
-	swagger generate spec -o ./swagger.yaml --scan-models
 
 installswagger:
-	install github.com/go-swagger/go-swagger/cmd/swagger@latest
+	go install github.com/go-swagger/go-swagger/cmd/swagger@latest
 
-.PHONY: run pushtogit swagger installswagger
+gobin:
+	export PATH=$PATH:$(go env GOPATH)/bin
+
+reloadsettings: gobin
+	. ~/.bashrc
+
+swagger:
+	export PATH="$$PATH:$$(go env GOPATH)/bin" && swagger generate spec -o ./swagger.yaml --scan-models
+
+.PHONY: run pushtogit swagger installswagger gobin reloadsettings
